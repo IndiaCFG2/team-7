@@ -58,7 +58,15 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+             {% url 'student_feedback_message' as student_feedback_message %}
+            <a href="{% url 'student_feedback_message' %}" class="nav-link {% if request.path == student_feedback_message %} active {% endif %}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Feedback
+              </p>
+            </a>
+          </li>
 
 
         </ul>

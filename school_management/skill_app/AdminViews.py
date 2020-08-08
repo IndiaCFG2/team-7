@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from skill_app.models import CustomUser
 
-from skill_app.models import Courses, Subjects, Staffs, Students
+from skill_app.models import Courses, Subjects, Staffs, Students,FeedBackStudent
 
 
 def admin_home(request):
@@ -154,6 +154,10 @@ def add_subject_save(request):
             messages.error(request, "Failed to Add Skill")
             return HttpResponseRedirect(reverse("add_subject"))
 
+def student_feedback_message(request):
+    feedbacks = FeedBackStudent.objects.all()
+    return render(request, "admin_template/student_feedback_template.html", {"feedbacks": feedbacks})
+
 
 @csrf_exempt
 def check_email_exist(request):
@@ -193,3 +197,17 @@ def check_roll_number_exist(request):
         return HttpResponse(True)
     else:
         return HttpResponse(False)
+
+
+@csrf_exempt
+def student_feedback_message_replied(request):
+    feedback_id = request.POST.get("id")
+    feedback_message = request.POST.get("message")
+
+    try:
+        feedback = FeedBackStudent.objects.get(id=feedback_id)
+        feedback.feedback_reply = feedback_message
+        feedback.save()
+        return HttpResponse("True")
+    except:
+        return HttpResponse("False")

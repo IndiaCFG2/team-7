@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from skill_app import views, AdminViews
+from skill_app import views, AdminViews, StudentViews
 from school_management import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -28,6 +29,13 @@ urlpatterns = [
     path('logout_user', views.logout_user, name="logout"),
     path('doLogin', views.doLogin, name="do_login"),
     path('admin_home', AdminViews.admin_home, name="admin_home"),
+    path('student_home', StudentViews.student_home, name="student_home"),
+    path('student_profile', StudentViews.student_profile, name="student_profile"),
+    path('student_profile_save', StudentViews.student_profile_save, name="student_profile_save"),
+    path('student_feedback',StudentViews.student_feedback,name="student_feedback"),
+    path('student_feedback_save',StudentViews.student_feedback_save,name="student_feedback_save"),
+    path('student_feedback_message',AdminViews.student_feedback_message,name="student_feedback_message"),
+    path('student_feedback_message_replied', AdminViews.student_feedback_message_replied, name="student_feedback_message_replied"),
     path('add_staff', AdminViews.add_staff, name="add_staff"),
     path('add_staff_save', AdminViews.add_staff_save, name="add_staff_save"),
     path('add_course', AdminViews.add_course, name="add_course"),
@@ -41,3 +49,5 @@ urlpatterns = [
     path('check_username_exist', AdminViews.check_username_exist, name="check_username_exist"),
     path('check_roll_number_exist', AdminViews.check_roll_number_exist, name="check_roll_number_exist"),
 ]
+
+urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
