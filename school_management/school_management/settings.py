@@ -131,6 +131,11 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = "skill_app.CustomUser"
 AUTHENTICATION_BACKENDS = ['skill_app.EmailBackEnd.EmailBackEnd']
 
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'a71518810@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'School Management System <a71518810@gmail.com>'
 
 
