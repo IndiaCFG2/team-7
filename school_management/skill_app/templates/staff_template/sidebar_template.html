@@ -23,6 +23,17 @@
             </a>
           </li>
           <li class="nav-item">
+            {% url 'add_link' as add_link %}
+          
+          <a href="{% url 'add_link' %}" class="nav-link {% if request.path == add_link %} active {% endif %} ">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Add Link
+            </p>
+          </a>
+        </li>
+
+          <li class="nav-item">
             {% url 'manage_student' as manage_student %}
             {% url 'select_student_class' as select_student_class %}
           

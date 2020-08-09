@@ -1,8 +1,16 @@
+import json
+
+# import requests
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Courses ,Students
+from django.views.decorators.csrf import csrf_exempt
+from skill_app.models import Courses ,Students,Links,CustomUser
 from twilio.rest import Client
-from django.http import HttpResponseRedirect
+
 
 
 def staff_home(request):
@@ -53,6 +61,28 @@ def send_whatsapp(request,student_id):
     print(message.sid)
     return HttpResponseRedirect(reverse('manage_student'))
 
+
+def add_link(request):
+    return render(request, "staff_template/add_link.html")
+
+
+def add_link_save(request):
+    if request.method != "POST":
+        return HttpResponse("Method Not Allowed")
+    else:
+        link = request.POST.get("link")
+        # try:
+        print(request.user.id)
+        course_model = Links(url=link,staff_id_id=request.user)
+        print(course_model.staff_id_id)
+        # course_model1=CustomUser(id=request.user.id)
+        course_model.save()
+        # course_model1.save()
+        messages.success(request, "Successfully Added Link")
+        return HttpResponseRedirect(reverse("add_link"))
+        # except:
+        #     messages.error(request, "Failed to Add Link")
+        #     return HttpResponseRedirect(reverse("add_link"))
 
 
 

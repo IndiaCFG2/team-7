@@ -53,7 +53,8 @@ urlpatterns = [
     path('select_student_class', StaffViews.select_student_class, name="select_student_class"),
     path('send_sms/<str:student_id>',StaffViews.send_sms,name="send_sms"),
     path('send_whatsapp/<str:student_id>',StaffViews.send_whatsapp,name="send_whatsapp"),
-
+    path('add_link', StaffViews.add_link, name="add_link"),
+    path('add_link_save', StaffViews.add_link_save, name="add_link_save"),
 ]
 
 urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

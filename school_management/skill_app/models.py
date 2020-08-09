@@ -33,6 +33,12 @@ class Staffs(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
+class Links(models.Model):
+    id = models.AutoField(primary_key=True)
+    staff_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    url=models.CharField(max_length=255)
+    
+
 
 class Courses(models.Model):
     id = models.AutoField(primary_key=True)
