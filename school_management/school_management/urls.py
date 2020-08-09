@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from skill_app import views, AdminViews, StudentViews
+from skill_app import views, AdminViews, StudentViews,StaffViews
 from school_management import settings
 from django.conf.urls.static import static
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('doLogin', views.doLogin, name="do_login"),
     path('admin_home', AdminViews.admin_home, name="admin_home"),
     path('student_home', StudentViews.student_home, name="student_home"),
+    path('staff_home', StaffViews.staff_home, name="staff_home"),
     path('student_profile', StudentViews.student_profile, name="student_profile"),
     path('student_profile_save', StudentViews.student_profile_save, name="student_profile_save"),
     path('student_feedback',StudentViews.student_feedback,name="student_feedback"),
@@ -48,6 +49,11 @@ urlpatterns = [
     path('check_teacher_roll_number_exist', AdminViews.check_teacher_roll_number_exist, name="check_teacher_roll_number_exist"),
     path('check_username_exist', AdminViews.check_username_exist, name="check_username_exist"),
     path('check_roll_number_exist', AdminViews.check_roll_number_exist, name="check_roll_number_exist"),
+    path('manage_student', StaffViews.manage_student, name="manage_student"),
+    path('select_student_class', StaffViews.select_student_class, name="select_student_class"),
+    path('send_sms/<str:student_id>',StaffViews.send_sms,name="send_sms"),
+    path('send_whatsapp/<str:student_id>',StaffViews.send_whatsapp,name="send_whatsapp"),
+
 ]
 
 urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

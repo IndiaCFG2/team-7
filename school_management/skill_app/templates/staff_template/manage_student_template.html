@@ -1,0 +1,64 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %}
+Manage Students
+{% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Student Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Roll Number</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Class</th>
+                      <th>User Name</th>
+                      <th>Email</th>
+                      <th>Gender</th>
+                      <th>Date Of Birth</th>
+                      <th>Blood Group</th>
+                      <th>Phone Number</th>
+                      <th>Address</th>
+                      <th>Profile Pic</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for student in students %}
+                  <tr>
+                      <td>{{ student.roll_number }}</td>
+                      <td>{{ student.admin.first_name }}</td>
+                      <td>{{ student.admin.last_name }}</td>
+                      <td>{{ student.course_id.course_name }}</td>
+                      <td>{{ student.admin.username }}</td>
+                      <td>{{ student.admin.email }}</td>
+                      <td>{{ student.gender }}</td>
+                      <td>{{ student.dob }}</td>
+                      <td>{{ student.blood_group }}</td>
+                      <td>{{ student.ph_no }}</td>
+                     <td>{{ student.address }}</td>
+                      <td><img src="{{ student.profile_pic }}" style="width:100px"/></td>
+                      <td><a href="send_sms/{{student.id}}" class="btn btn-info">Send Link</a><a href="send_whatsapp/{{student.id}}" class="btn btn-success">Whatsapp Link</a></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
